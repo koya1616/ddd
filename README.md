@@ -1,24 +1,7 @@
-# README
+コントローラーの続き
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+【Rails】deviseのコントローラを独自にカスタマイズする方法
+https://toarurecipes.com/devise-customize/
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+【Rails】「devise_for」と「devise_scope」について
+http://www.code-magagine.com/?p=13096
