@@ -7,16 +7,31 @@ class AdClients::SessionsController < Devise::SessionsController
   # def new
   #   super
   # end
+  
+  # login as guest 
+  def new_guest
+    ad_client = AdClient.guest_ad_client
+    sign_in ad_client
+    redirect_to dashboard_ad_client_path(current_ad_client), notice: "ゲストユーザーとしてログインしました。"
+  end
 
   # POST /resource/sign_in
   # def create
   #   super
   # end
+  
+  def after_sign_in_path_for(resource)
+    dashboard_ad_client_path(resource)
+  end
 
   # DELETE /resource/sign_out
   # def destroy
   #   super
   # end
+  
+  def after_sign_out_path_for(resource)
+    new_ad_client_session_path
+  end
 
   # protected
 
