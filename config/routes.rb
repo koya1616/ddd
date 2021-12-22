@@ -31,6 +31,28 @@ Rails.application.routes.draw do
     resources :contacts, only: [:index, :show]
   end
   
+  resources :ad_clients, only:[:index, :show, :edit, :update] do 
+      member do
+        get :dashboard
+        get :followings, :followers
+      end
+    scope module: :ad_clients do
+      resources :complete_deals, only:[:index, :show, :create, :edit, :update]
+      resources :ads
+    end
+  end 
+  
+  resources :drivers, only:[:index, :show, :edit, :update] do
+      member do
+        get :dashboard
+        get :followings, :followers
+        patch :is_active
+      end
+    resources :car_informations, only:[:index, :create, :edit, :update, :destroy]
+    resources :transfer_informations, only:[:index, :create, :edit, :update, :destroy]
+  end
+  
+  
   resources :contacts, only:[:new, :create, :index, :show, :update] do
     post :confirm, action: :confirm_new, on: :new
   end

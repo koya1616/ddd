@@ -1,6 +1,4 @@
-undefined local variable or method `drivers_path' for #<#<Class:0x00007fb25c8ec608>:0x00007fb25c8fab90>
-Did you mean?  driver_session_path
-このエラー解決
+カラム追加からactivity_area
 
 【Rails】deviseのコントローラを独自にカスタマイズする方法
 https://toarurecipes.com/devise-customize/
@@ -40,3 +38,18 @@ https://qiita.com/kidach1/items/9f76a27890d96b9f5838
 
 【Rails】 resourcesメソッドを使ってルーティングを定義しよう！
 https://pikawaka.com/rails/resources
+
+railsのroutes.rbのmemberとcollectionの違いは?
+https://qiita.com/k152744/items/141345e34fc0095217fe
+
+RubyのModuleの使い方とはいったい
+https://qiita.com/shiopon01/items/fd6803f792398c5219cd
+
+Railsのroutingにおけるscope / namespace / module の違い
+https://qiita.com/ryosuketter/items/9240d8c2561b5989f049
+
+protect_from_forgeryに関するRailsのコメントが秀逸すぎたのでぜひみんな読んでほしい
+https://makicamel.hatenablog.com/entry/2019/03/06/230344
+
+devise_parameter_sanitizerメソッドについて
+https://qiita.com/kaito121855/items/e1a80da8557258c497dc
