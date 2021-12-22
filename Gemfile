@@ -61,7 +61,25 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "devise"
-gem "refile", require: "refile/rails", github: 'manfe/refile'
-gem "refile-mini_magick"
-gem 'geocoder'
+# gem "devise"
+# gem "refile", require: "refile/rails", github: 'manfe/refile'
+# gem "refile-mini_magick"
+# gem 'geocoder'
+# gem 'bootstrap-sass', '~> 3.4.1'
+# gem 'bootstrap3-datetimepicker-rails'
+
+  gem "devise"
+  gem "refile", require: "refile/rails", github: 'manfe/refile'
+  gem "refile-mini_magick"
+  gem 'bootstrap-sass', '~> 3.4.1'
+  gem 'jquery-rails'
+  gem 'kaminari'
+  gem 'pry-byebug'
+  gem 'momentjs-rails'
+  gem 'bootstrap3-datetimepicker-rails'
+  gem 'dotenv-rails'
+  gem 'rails-i18n'
+  gem 'enum_help'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
+  gem 'geocoder'

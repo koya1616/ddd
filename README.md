@@ -1,4 +1,6 @@
-adコントローラーのgenre_searchから
+undefined local variable or method `drivers_path' for #<#<Class:0x00007fb25c8ec608>:0x00007fb25c8fab90>
+Did you mean?  driver_session_path
+このエラー解決
 
 【Rails】deviseのコントローラを独自にカスタマイズする方法
 https://toarurecipes.com/devise-customize/
@@ -29,3 +31,12 @@ https://qiita.com/morrr/items/54f4be21032a45fd4fe9
 
 [Rails]refileの使い方を初心者がまとめてみた。[refile]
 https://qiita.com/syo19961113/items/b5f60e3df64f69cfe5c3
+
+【Rails】 joinsメソッドの使い方 ~ テーブル結合からネストまで学ぶ
+https://pikawaka.com/rails/joins
+
+RailsにDateTimePickerを導入する
+https://qiita.com/kidach1/items/9f76a27890d96b9f5838
+
+【Rails】 resourcesメソッドを使ってルーティングを定義しよう！
+https://pikawaka.com/rails/resources

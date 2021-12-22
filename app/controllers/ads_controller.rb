@@ -21,7 +21,17 @@ class AdsController < ApplicationController
   # ジャンル検索画面
   def genre_search
     ads = Ad.where(genre_id: params[:id])
-    @ads = ads.page(params)
+    @ads = ads.page(params[:page]).per(9)
+    @genres = Genre.all
+    @genre = Genre.find(params[:id])
+  end
+  
+  # お気に入り広告の検索画面
+  def favorite_search
+    @genres = Genre.all
+    @driver = current_driver
+    ads = Ad.joins(:favorite).where(favorite: { driver: @driver })
+    @ads = ads.page(params[:page]).per(9)
   end
   
 end
