@@ -1,4 +1,4 @@
-ad_clientのviewから
+adコントローラーのgenre_searchから
 
 【Rails】deviseのコントローラを独自にカスタマイズする方法
 https://toarurecipes.com/devise-customize/
@@ -20,3 +20,12 @@ https://qiita.com/tiara/items/573fe5f1a84ca57dabcd
 
 after_validation | Railsドキュメント
 https://railsdoc.com/page/after_validation
+
+RailsのCSRF保護を詳しく調べてみた（翻訳）
+https://techracho.bpsinc.jp/hachi8833/2021_11_26/46891
+
+turbolinksチートシート
+https://qiita.com/morrr/items/54f4be21032a45fd4fe9
+
+[Rails]refileの使い方を初心者がまとめてみた。[refile]
+https://qiita.com/syo19961113/items/b5f60e3df64f69cfe5c3

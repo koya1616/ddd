@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'ads/index'
+  get 'ads/show'
   devise_for :admins, controllers:{
     registrations: "admins/registration",
     sessions: "admins/session"

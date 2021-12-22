@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="col-xs-3">
+		<!-- サイドバー -->
+		<% if ad_client_signed_in? %>
+			<%= render 'ad_clients/sidebar', ad_client: current_ad_client %>
+		<% elsif driver_signed_in?%>
+			<%= render "drivers/sidebar", driver: current_driver %>
+		<% end %>
+	</div><br>
+	<div class="col-xs-6">
+		<h3>フォロワー リスト</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @followers.each do |ad_client| %>
+					<tr>
+						<td><%= attachment_image_tag ad_client, :profile_image, :fill, 80, 80, fallback: "no-image-mini.jpg" %></td>
+						<td><%= ad_client.company_name %></td>
+						<td><%= link_to ad_client, class: "btn02", data: {"turbolinks" => false} do %><span>詳細<i class="fas fa-arrow-right"></i><% end %></td>
+					</tr>
+			 <% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

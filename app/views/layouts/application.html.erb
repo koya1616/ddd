@@ -1,15 +1,189 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ddd</title>
+    <title>PortfolioYagishita</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   </head>
-
   <body>
+    <!-- ヘッダー -->
+    <header>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-2">
+            <h3 class="logo"><%= link_to image_tag('logo.png',width:'70'),homes_index_path %> Ader</h3>
+          </nav>
+          </div>
+          <!-- 検索フォーム -->
+          <div class="col-xs-3" id="search-area">
+            <% if ad_client_signed_in? %>
+              <div class="search-form" >
+                  <%= form_tag(search_ad_client_path, method: :get) do %>
+                    <%= text_field_tag 'search[content]' %>
+                    <%= button_tag type:"submit" do %><i class="fas fa-search"></i><% end %>
+                  <% end %>
+              </div>
+            </form>
+            <% elsif driver_signed_in? %>
+              <div class="search-form">
+                <%= form_tag(search_driver_path, method: :get) do %>
+                    <%= text_field_tag 'search[content]' %>
+                    <%= button_tag type:"submit" do %><i class="fas fa-search"></i><% end %>
+                  <% end %>
+              </div>
+            <% end %>
+          </div>
+       　<!-- ヘッダーメニュー -->
+         　<div class="col-xs-7">
+            <nav class="navbar navbar-nav navbar-right">
+                <ul class="nav navbar-nav">
+                  <% if ad_client_signed_in? %>
+                    <li><%= link_to dashboard_ad_client_path(current_ad_client) do %><i class="far fa-address-card">  マイぺージ</i><% end %></li>
+                    <li><%= link_to followings_ad_client_path(current_ad_client) do %><i class="far fa-check-circle">  フォロードライバー</i><% end %></li>
+                    <li><%= link_to informations_path do %><i class="far fa-bell">  お知らせ</i><% end %></li>
+                    <li><%= link_to new_contact_path do %><i class="far fa-envelope">  お問い合わせ</i><% end %></li>
+                    <li><%= link_to destroy_ad_client_session_path, method: :delete do %><i class="far fa-user">  ログアウト</i><% end %></li>
+                  <% elsif driver_signed_in? %>
+                    <li><%= link_to dashboard_driver_path(current_driver) do %><i class="far fa-address-card"> マイぺージ</i><% end %></li>                  
+                    <li><%= link_to favorite_search_ad_path(current_driver) do %><i class="far fa-heart"></i> お気に入り</i><% end %></li>
+                    <li><%= link_to informations_path do %><i class="far fa-bell">  お知らせ</i><% end %></li>
+                    <li><%= link_to new_contact_path do %><i class="far fa-envelope">  お問い合わせ</i><% end %></li>
+                    <li><%= link_to destroy_driver_session_path, method: :delete do %><i class="far fa-user">  ログアウト</i><% end %></li>
+                  <% elsif admin_signed_in?%>
+                    <li><%= link_to "ダッシュボード",admins_path %></li>
+                    <li><%= link_to "広告 一覧",ads_path %></li>
+                    <li><%= link_to "ドライバー 一覧",drivers_path %></li>
+                    <li><%= link_to "広告主 一覧",ad_clients_path %></li>
+                    <li><%= link_to "ログアウト",destroy_admin_session_path  , method: :delete %></li>
+                  <% else %>
+                    <li><%= link_to homes_about_path do %><i class="fab fa-adn">  About Ader</i><% end %></li>
+                    <li><%= link_to new_contact_path do %><i class="far fa-envelope">  お問い合わせ</i><% end %></li>
+                    <li>
+                      <a class="dropdown-toggle" data-toggle="dropdown"><i class="far fa-edit">  新規登録</i><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown"><%= link_to "ドライバーになる",new_driver_registration_path %></a></li>
+                          <li><a class="dropdown"><%= link_to "広告主になる",new_ad_client_registration_path %></a></li>
+                        </ul>
+                    </li>                                
+                    <li>
+                      <a class="dropdown-toggle" data-toggle="dropdown"><i class="far fa-user">  ログイン</i><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown"><%= link_to "ドライバー",new_driver_session_path %></a></li>
+                          <li><a class="dropdown"><%= link_to "広告主",new_ad_client_session_path %></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                      <a class="icon" href="https://twitter.com/Ader21745141" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li>
+                      <a class="icon" href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- メイン -->
+    <main>
+      <!-- エラーメッセージ -->
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-1">
+          <% if flash[:notice] %>
+            <div class="alert alert-success">
+              <%= flash[:notice] %>
+            </div>
+          <% elsif flash[:alert] %>
+            <div class="alert alert-danger">
+              <%= flash[:alert] %>
+            </div>
+          <% elsif flash[:error] %>
+            <div class="alert alert-danger">
+              <%= flash[:error] %>
+            </div>
+          <% elsif flash[:contact] %>
+            <div class="alert alert-success">
+              <%= flash[:contact] %>
+            </div>
+          <% elsif flash[:blank] %> <!-- 未入力エラーに対するメッセージ -->
+            <div class="alert alert-success">
+              <%= flash[:blank] %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     <%= yield %>
+   </main>
+  <!-- フッター -->
+    <footer class="nb-footer">    
+      <div class="container"> 
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="about">
+              <p>Deliver a small business to you.<br>Small happiness with driving.</p>
+              <p>Aderは広告を出したい企業と広告宣伝を行いたいドライバーをマッチングするアプリケーションです</p>
+            <div class="social-media">
+              <ul class="list-inline">
+                <li><a class="icon" href="https://twitter.com/Ader21745141" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                <li><a class="icon" href="https://twitter.com/Ader21745141" title="Twitter"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/Ader21745141" title=""><i class="fab fa-google-plus"></i></a></li>
+                <li><a href="https://twitter.com/Ader21745141" title=""><i class="fab fa-linkedin"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="footer-info-single">
+            <h2 class="title">Help</h2>
+            <ul class="list-unstyled">
+              <li><a href="" title=""><i class="fa fa-angle-double-right"></i> ご利用の流れ</a></li>
+              <li><%= link_to homes_about_path do %><i class="fa fa-angle-double-right"></i> よくある質問</a><% end %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="footer-info-single">
+            <h2 class="title">Information</h2>
+            <ul class="list-unstyled">
+                <li><%= link_to homes_about_path do %><i class="fa fa-angle-double-right"></i> About Ader</a><% end %></li>
+                <li><%= link_to new_contact_path do %><i class="fa fa-angle-double-right"></i> お問い合わせ</a><% end %></li>
+                <li><%= link_to homes_about_path do %><i class="fa fa-angle-double-right"></i> 会社概要</a><% end %></li>
+              </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="footer-info-single">
+            <h2 class="title">Security & privacy</h2>
+              <ul class="list-unstyled">
+                <li><a href="https://drive.google.com/open?id=1S4yUlGV0eq2iKZGOVUhfwSGGeFXSo35_" title=""><i class="fa fa-angle-double-right"></i> 利用規約</a></li>
+                <li><a href="https://drive.google.com/open?id=1S4yUlGV0eq2iKZGOVUhfwSGGeFXSo35_" title=""><i class="fa fa-angle-double-right"></i> プライバシーポリシー</a></li>
+              </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="footer-info-single">
+            <h2 class="title">Notes</h2>
+            <p>こちらのサイトはポートフォリオ用の架空のサービス及び法人となります。本サイトに掲載されている画像等は、商用写真を利用しています。また重要な情報を誤入力しないうようにお気をつけください。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+      <section class="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Copyright © 2020 Ader</p>
+            </div>
+            <div class="col-sm-6"></div>
+            </div>
+        </div>
+      </section>
+    </footer>
   </body>
 </html>
